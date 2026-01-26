@@ -5,6 +5,7 @@ public class PlayerBrain : MonoBehaviour
 {
     [SerializeField] private PlayerMotor playerMotor;
     [SerializeField] private PlayerCamera playerCamera;
+    [SerializeField] private PlayerGunManager playerGunManager;
 
     //Test
     [SerializeField] private Raycaster raycaster;
@@ -44,12 +45,7 @@ public class PlayerBrain : MonoBehaviour
 
         playerMotor.UpdateMotor();
 
-        //Testing
-        Camera mainCam = Camera.main;
-
-        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-
-        raycaster.GetRaycastTarget(ray, 10);
+        playerGunManager.UpdateWeapon();
     }
 
     private void SubscribeToEvents()
@@ -61,6 +57,11 @@ public class PlayerBrain : MonoBehaviour
         input.Player.Move.canceled += OnMove;
 
         input.Player.Jump.performed += OnJump;
+
+        input.Player.Reload.performed += OnReload;
+
+        input.Player.Fire.performed += OnFirePressed;
+        input.Player.Fire.canceled += OnFireReleased;
     }
 
     private void UnsubscribeFromEvents()
@@ -72,6 +73,11 @@ public class PlayerBrain : MonoBehaviour
         input.Player.Move.canceled -= OnMove;
 
         input.Player.Jump.performed -= OnJump;
+
+        input.Player.Reload.performed -= OnReload;
+
+        input.Player.Fire.performed -= OnFirePressed;
+        input.Player.Fire.canceled -= OnFireReleased;
     }
 
     private void OnJump(InputAction.CallbackContext context)
@@ -87,5 +93,20 @@ public class PlayerBrain : MonoBehaviour
     private void OnLook(InputAction.CallbackContext context)
     {
         lookInput = context.ReadValue<Vector2>();
+    }
+
+    private void OnFirePressed(InputAction.CallbackContext context)
+    {
+        playerGunManager.OnFireWeaponPressed();
+    }
+
+    private void OnFireReleased(InputAction.CallbackContext context)
+    {
+        playerGunManager.OnFireWeaponReleased();
+    }
+
+    private void OnReload(InputAction.CallbackContext context)
+    {
+        playerGunManager.OnReload();
     }
 }

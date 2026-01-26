@@ -1,3 +1,4 @@
+using System.Net.Configuration;
 using UnityEngine;
 
 public class PlayerGunManager : MonoBehaviour
@@ -6,6 +7,31 @@ public class PlayerGunManager : MonoBehaviour
 
     private WeaponBase currentWeapon;
     private int currentWeaponIndex = 0;
+
+    private void Start()
+    {
+        SelectWeapon(weapons[currentWeaponIndex]);
+    }
+
+    public void UpdateWeapon()
+    {
+        currentWeapon.UpdateWeapon();
+    }
+
+    public void OnFireWeaponPressed()
+    {
+        currentWeapon.OnFirePressed();
+    }
+
+    public void OnFireWeaponReleased()
+    {
+        currentWeapon.OnFireReleased();
+    }
+
+    public void OnReload()
+    {
+        currentWeapon.OnReload();
+    }
 
     private void SelectWeapon(WeaponBase weapon)
     {
@@ -35,15 +61,4 @@ public class PlayerGunManager : MonoBehaviour
             currentWeaponIndex = weapons.Length - 1;
         }
     }
-}
-
-public class WeaponBase : MonoBehaviour
-{
-    public string weaponName;
-}
-
-public class Sniper : WeaponBase
-{ 
-
-
 }

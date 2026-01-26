@@ -3,24 +3,30 @@
 public class Raycaster : MonoBehaviour
 {
     [SerializeField] private LayerMask validLayers;
-    [SerializeField] private bool enableGizmos = true;
+    [HideInInspector] public Camera mainCamera;
 
-    public GameObject GetRaycastTarget(Ray ray, float distance)
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
+
+    public RaycastHit GetRaycastTarget(Ray ray, float distance)
     {
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, distance, validLayers))
         {
-            return hit.collider.gameObject;
+            return hit;
         }
 
-        return null;
+        return hit;
     }
 
-    private void OnDrawGizmos()
+    public Vector3 GetMouseWorldPosition()
     {
-        if(enableGizmos)
-        {
-            
-        }
+        if (!mainCamera)
+            return this.transform.position;
+
+        return mainCamera.ScreenToWorldPoint(Input.mousePosition);
     }
+
 }
