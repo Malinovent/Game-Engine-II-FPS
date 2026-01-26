@@ -6,6 +6,9 @@ public class PlayerBrain : MonoBehaviour
     [SerializeField] private PlayerMotor playerMotor;
     [SerializeField] private PlayerCamera playerCamera;
 
+    //Test
+    [SerializeField] private Raycaster raycaster;
+
     private Input_PlayerControls input;
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -40,6 +43,13 @@ public class PlayerBrain : MonoBehaviour
         playerCamera.Pitch(lookInput.y);
 
         playerMotor.UpdateMotor();
+
+        //Testing
+        Camera mainCam = Camera.main;
+
+        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+
+        raycaster.GetRaycastTarget(ray, 10);
     }
 
     private void SubscribeToEvents()
