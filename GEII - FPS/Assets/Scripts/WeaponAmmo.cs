@@ -16,14 +16,14 @@ public class WeaponAmmo : MonoBehaviour
     [SerializeField] private int maxAmmo = 10;
 
 
-    private int currentAmmo = 10;
-    private int currentMagazine = 3;
+    private int remainingAmmo = 10;
+    private int remainingMagazines = 3;
 
 
     private void Awake()
     {
-        currentAmmo = maxAmmo;
-        currentMagazine = maxMagazine;
+        remainingAmmo = maxAmmo;
+        remainingMagazines = maxMagazine;
     }
 
     public void UpdateReload(float deltaTime)
@@ -40,17 +40,17 @@ public class WeaponAmmo : MonoBehaviour
 
     public void FireShot()
     {
-        currentAmmo = Mathf.Max(0, currentAmmo - 1);
+        remainingAmmo = Mathf.Max(0, remainingAmmo - 1);
     }
 
     public bool HasAmmo()
     {
-        return currentAmmo > 0;
+        return remainingAmmo > 0;
     }
 
     public bool CanReload()
     {
-        return currentMagazine > 0;
+        return remainingMagazines > 0 && !isReloading && remainingAmmo < maxAmmo;
     }
 
     public void StartReload()
@@ -64,9 +64,9 @@ public class WeaponAmmo : MonoBehaviour
     private void Reload()
     {
         isReloading = false;
-        currentAmmo = maxAmmo;
+        remainingAmmo = maxAmmo;
         reloadTimer = 0f;
-        currentMagazine = Mathf.Max(0, currentMagazine - 1);
-        Debug.Log("Reloaded. Current Magazine: " + currentMagazine);
+        remainingMagazines = Mathf.Max(0, remainingMagazines - 1);
+        Debug.Log("Reloaded. Current Magazine: " + remainingMagazines);
     }
 }

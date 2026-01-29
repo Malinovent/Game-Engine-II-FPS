@@ -1,11 +1,11 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Sniper : WeaponBase
+public class Sniper : WeaponBase, IReloadable
 {
-    [SerializeField] Raycaster raycaster;
     [SerializeField] WeaponRateOfFire rateOfFire;
     [SerializeField] WeaponAmmo weaponAmmo;
+    [SerializeField] WeaponRaycaster raycaster;
 
     public override void UpdateWeapon()
     {
@@ -15,26 +15,12 @@ public class Sniper : WeaponBase
 
     private void FireWeapon()
     {
-        Vector3 startingPosition = raycaster.GetMouseWorldPosition();
-        Ray ray = new Ray(startingPosition, transform.forward);
-        RaycastHit hit = raycaster.GetRaycastTarget(ray, 100f);
+        raycaster.FireShot();
         rateOfFire.FireShot();
         weaponAmmo.FireShot();
-
-        if (hit.collider != null)
-        {
-            Debug.Log("Sniper hit: " + hit.collider.name);
-        }
     }
 
-    private void OnDrawGizmos()
-    {
-        Vector3 startingPosition = raycaster.GetMouseWorldPosition();
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(startingPosition, transform.forward * 100f);
-    }
-
-    public override void OnFirePressed()
+    public override void FirePressed()
     {
         if (weaponAmmo.HasAmmo() && rateOfFire.CanFire && !weaponAmmo.IsReloading)
         {
@@ -42,12 +28,7 @@ public class Sniper : WeaponBase
         }
     }
 
-    public override void OnFireReleased()
-    {
-        
-    }
-
-    public override void OnReload()
+    public void Reload()
     {
         weaponAmmo.StartReload();
     }

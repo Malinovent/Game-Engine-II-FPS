@@ -7,9 +7,6 @@ public class PlayerBrain : MonoBehaviour
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private PlayerGunManager playerGunManager;
 
-    //Test
-    [SerializeField] private Raycaster raycaster;
-
     private Input_PlayerControls input;
     private Vector2 moveInput;
     private Vector2 lookInput;

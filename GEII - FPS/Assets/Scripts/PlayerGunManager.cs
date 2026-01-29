@@ -20,17 +20,36 @@ public class PlayerGunManager : MonoBehaviour
 
     public void OnFireWeaponPressed()
     {
-        currentWeapon.OnFirePressed();
+        IFirePressed weapon = currentWeapon as IFirePressed;
+        weapon?.FirePressed();
+
+        if (weapon == null)
+        {
+            Debug.Log($"Failed to fire [PRESSED]: {currentWeapon.name} ");
+        }
     }
 
     public void OnFireWeaponReleased()
     {
-        currentWeapon.OnFireReleased();
+        IFireReleased weapon = currentWeapon as IFireReleased;
+        weapon?.FireReleased();
+
+        if (weapon == null)
+        {
+            Debug.Log($"Failed to fire [RELEASED]: {currentWeapon.name} ");
+        }
     }
 
     public void OnReload()
     {
-        currentWeapon.OnReload();
+        IReloadable reloadable = currentWeapon as IReloadable;
+        reloadable?.Reload();
+
+        if(reloadable == null)
+        {
+            Debug.Log($"Failed to load: {currentWeapon.name} ");
+        }
+        //currentWeapon.OnReload();
     }
 
     private void SelectWeapon(WeaponBase weapon)
@@ -61,4 +80,19 @@ public class PlayerGunManager : MonoBehaviour
             currentWeaponIndex = weapons.Length - 1;
         }
     }
+}
+
+public interface IReloadable
+{
+    public void Reload();
+}
+
+public interface IFirePressed
+{
+    public void FirePressed();
+}
+
+public interface IFireReleased
+{
+    public void FireReleased();
 }
