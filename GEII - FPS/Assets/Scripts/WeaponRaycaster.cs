@@ -3,48 +3,67 @@ using UnityEngine;
 public class WeaponRaycaster : MonoBehaviour
 {
     [SerializeField] private LayerMask validLayers;
-    [HideInInspector] public Camera mainCamera;
+    [SerializeField] private float maxDistance = 200f;
+
+    public Camera mainCamera { get; private set; }
+
+    private RaycastHit currentTarget;
+    private bool hasTarget;
 
     private void Awake()
     {
         mainCamera = Camera.main;
     }
 
-    public RaycastHit GetRaycastTarget(Ray ray, float distance)
+    public bool TryGetTarget(out RaycastHit hit)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, distance, validLayers))
-        {
-            return hit;
-        }
-
-        return hit;
+        hit = currentTarget;
+        return hasTarget && currentTarget.collider != null;
     }
 
-    private Vector3 GetMouseWorldPosition()
+    public void UpdateTargetFromMouse()
     {
         if (!mainCamera)
-            return this.transform.position;
+        {
+            hasTarget = false;
+            return;
+        }
 
-        return mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out var hit, maxDistance, validLayers, QueryTriggerInteraction.Ignore))
+        {
+            currentTarget = hit;
+            hasTarget = true;
+        }
+        else
+        {
+            currentTarget = default;
+            hasTarget = false;
+        }
     }
 
-    public void FireShot()
+    public Vector3 GetAimPoint(Vector3 fallbackOrigin, Vector3 fallbackForward)
     {
-        Vector3 startingPosition = GetMouseWorldPosition();
-        Ray ray = new Ray(startingPosition, transform.forward);
-        RaycastHit hit = GetRaycastTarget(ray, 100f);        
+        if (hasTarget && currentTarget.collider != null)
+            return currentTarget.point;
 
-        if (hit.collider != null)
-        {
-            Debug.Log("hit: " + hit.collider.name);
-        }
+        // If nothing hit, aim straight ahead into space (useful for shooting at nothing)
+        return fallbackOrigin + fallbackForward * maxDistance;
     }
 
     private void OnDrawGizmos()
     {
-        Vector3 startingPosition = GetMouseWorldPosition();
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(startingPosition, transform.forward * 100f);
+        if (!Application.isPlaying || !mainCamera) return;
+
+        Gizmos.color = hasTarget ? Color.red : Color.gray;
+
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Gizmos.DrawRay(ray.origin, ray.direction * maxDistance);
+
+        UpdateTargetFromMouse();
+
+        if (hasTarget)
+            Gizmos.DrawSphere(currentTarget.point, 0.15f);
     }
 }

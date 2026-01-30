@@ -10,7 +10,11 @@ public class SMG : WeaponBase, IFireReleased, IReloadable
 
     private void FireWeapon()
     {
-        raycaster.FireShot();
+        if(raycaster.TryGetTarget(out RaycastHit hit))
+        {
+            //Do damage
+        }
+
         RoF.FireShot();
         ammo.FireShot();
     }

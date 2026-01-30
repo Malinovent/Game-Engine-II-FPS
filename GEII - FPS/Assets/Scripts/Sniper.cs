@@ -15,7 +15,11 @@ public class Sniper : WeaponBase, IReloadable
 
     private void FireWeapon()
     {
-        raycaster.FireShot();
+        if (raycaster.TryGetTarget(out RaycastHit hit))
+        {
+            //Do damage
+        }
+
         rateOfFire.FireShot();
         weaponAmmo.FireShot();
     }
