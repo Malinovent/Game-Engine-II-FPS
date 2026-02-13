@@ -7,6 +7,11 @@ public class Sniper : WeaponBase, IReloadable
     [SerializeField] WeaponAmmo weaponAmmo;
     [SerializeField] WeaponRaycaster raycaster;
 
+    void Start()
+    {
+        weaponAmmo.OnReloadFinished += UpdateWeaponData;
+    }
+
     public override void UpdateWeapon()
     {
         rateOfFire.UpdateFire(Time.deltaTime);

@@ -25,7 +25,7 @@ public class UIWeaponManager : MonoBehaviour
     public void SetWeaponInfo(WeaponData weaponData)
     {
         ammoText1.SetText(weaponData.ammoText1);
-        ammoText2.SetText(weaponData.ammoText2);
+        ammoText2.SetText("____\n" + weaponData.ammoText2);
         magazineText.SetText(weaponData.magazineText);
         weaponName.SetText(weaponData.weaponName);
     }

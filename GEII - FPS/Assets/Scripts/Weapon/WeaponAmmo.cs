@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public class WeaponAmmo : MonoBehaviour
 {
     [Header("Reload Parameters")]
@@ -22,6 +22,8 @@ public class WeaponAmmo : MonoBehaviour
     public int MaxAmmo => maxAmmo;
     public int RemainingAmmo => remainingAmmo;
     public int RemainingMagazines => remainingMagazines;
+
+    public event Action OnReloadFinished;
 
 
     private void Awake()
@@ -71,6 +73,7 @@ public class WeaponAmmo : MonoBehaviour
         remainingAmmo = maxAmmo;
         reloadTimer = 0f;
         remainingMagazines = Mathf.Max(0, remainingMagazines - 1);
+        OnReloadFinished?.Invoke();
         Debug.Log("Reloaded. Current Magazine: " + remainingMagazines);
     }
 }

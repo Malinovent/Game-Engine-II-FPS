@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,8 +15,6 @@ public class PlayerBrain : MonoBehaviour
     private void Awake()
     {
         input = new Input_PlayerControls();
-
-        Debug.Log("PlayerBrain Awake: Input system initialized.");
     }
 
     private void OnEnable()
@@ -59,6 +58,17 @@ public class PlayerBrain : MonoBehaviour
 
         input.Player.Fire.performed += OnFirePressed;
         input.Player.Fire.canceled += OnFireReleased;
+
+        input.Player.SwitchWeapon.performed += OnSwitchWeapon;
+    }
+
+    private void OnSwitchWeapon(InputAction.CallbackContext ctx)
+    {
+        float value = ctx.ReadValue<float>();
+
+        playerGunManager.SwitchWeapon(value > 0);
+
+        Debug.Log($"Scroll wheel: {value}");
     }
 
     private void UnsubscribeFromEvents()

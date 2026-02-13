@@ -8,6 +8,11 @@ public class SMG : WeaponBase, IFireReleased, IReloadable
 
     private bool isFiring = false;
 
+    void Start()
+    {
+        ammo.OnReloadFinished += UpdateWeaponData;
+    }
+
     private void FireWeapon()
     {
         if(raycaster.TryGetTarget(out RaycastHit hit))
@@ -17,6 +22,7 @@ public class SMG : WeaponBase, IFireReleased, IReloadable
 
         RoF.FireShot();
         ammo.FireShot();
+        UpdateWeaponData();
     }
 
     public override void UpdateWeapon()

@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 7823829686063857463}
   - component: {fileID: 8218280781411109714}
   - component: {fileID: 8160307738982095272}
+  - component: {fileID: 1627010333714504386}
   m_Layer: 0
   m_Name: RPJ
   m_TagString: Untagged
@@ -340,6 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RocketLauncher
   weaponName: Rocket Launcher
+  ammo: {fileID: 1627010333714504386}
   RoF: {fileID: 7823829686063857463}
   projectileLauncher: {fileID: 8218280781411109714}
 --- !u!114 &7823829686063857463
@@ -386,3 +388,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   maxDistance: 200
+--- !u!114 &1627010333714504386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059746684074866481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1f26e0de101614487fbc1d63bceb2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponAmmo
+  maxMagazine: 5
+  reloadTime: 2
+  maxAmmo: 1

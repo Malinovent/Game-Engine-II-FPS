@@ -15,7 +15,7 @@ public class PlayerGunManager : MonoBehaviour
 
     public void UpdateWeapon()
     {
-        currentWeapon.UpdateWeapon();
+        currentWeapon?.UpdateWeapon();
     }
 
     public void OnFireWeaponPressed()
@@ -54,31 +54,50 @@ public class PlayerGunManager : MonoBehaviour
 
     private void SelectWeapon(WeaponBase weapon)
     {
+        currentWeapon?.gameObject.SetActive(false);
         currentWeapon = weapon;
+        currentWeapon.gameObject.SetActive(true);
     }
 
     public void SelectWeapon(int weaponIndex)
-    {
+    {       
         currentWeaponIndex = Mathf.Clamp(weaponIndex, 0, weapons.Length - 1);
         SelectWeapon(weapons[currentWeaponIndex]);
     }
 
-    public void NextWeapon()
+    public void SwitchWeapon(bool nextWeapon)
     {
+        if(nextWeapon)
+        {
+            NextWeapon();
+            Debug.Log("Switching to next weapon");
+        }
+        else
+        {
+            PreviousWeapon();
+        }
+    }
+
+    private void NextWeapon()
+    {       
         currentWeaponIndex++;
         if(currentWeaponIndex >= weapons.Length)
         {
             currentWeaponIndex = 0;
         }
+
+        SelectWeapon(currentWeaponIndex);
     }
 
-    public void PreviousWeapon()
+    private void PreviousWeapon()
     {
         currentWeaponIndex--;
         if(currentWeaponIndex < 0)
         {
             currentWeaponIndex = weapons.Length - 1;
         }
+
+        SelectWeapon(currentWeaponIndex);
     }
 }
 

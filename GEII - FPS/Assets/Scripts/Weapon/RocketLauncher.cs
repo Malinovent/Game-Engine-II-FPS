@@ -6,6 +6,11 @@ public class RocketLauncher : WeaponBase
     [SerializeField] private WeaponRateOfFire RoF;
     [SerializeField] private WeaponProjectileLauncher projectileLauncher;
 
+    private void Start()
+    {
+        ammo.OnReloadFinished += UpdateWeaponData;
+    }
+
     public override void FirePressed()
     {
         if (RoF.CanFire && ammo.HasAmmo())
@@ -22,10 +27,11 @@ public class RocketLauncher : WeaponBase
     public override void UpdateWeapon()
     {
         RoF.UpdateFire(Time.deltaTime);
+        ammo.UpdateReload(Time.deltaTime);
     }
 
     protected override void UpdateWeaponData()
     {
-        WeaponDataPublisher.PublishData(ammo, weaponName);
+        WeaponDataPublisher.PublishData(ammo.RemainingAmmo.ToString(), ammo.RemainingMagazines.ToString(), "", weaponName);
     }
 }

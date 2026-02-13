@@ -4,6 +4,7 @@ public class Knife : WeaponBase
 {
     [SerializeField] private WeaponRateOfFire RoF;
 
+
     private void FireMelee()
     {
         RoF.FireShot();
