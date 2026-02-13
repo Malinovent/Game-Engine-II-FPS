@@ -168,6 +168,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8522638038369091727}
+  - {fileID: 9042721332728617300}
   - {fileID: 3981850562525211776}
   - {fileID: 6556595143853297762}
   m_Father: {fileID: 4335558870344499694}
@@ -420,6 +421,7 @@ MonoBehaviour:
   - {fileID: 4236038343888024950}
   - {fileID: 8133950766598420681}
   - {fileID: 3472585236286864860}
+  - {fileID: 9066231549388754534}
 --- !u!1001 &305968474579766134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -497,6 +499,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895e4e14b45ed5b4a9ac48fc8d33e2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SMG
+--- !u!1001 &939730703813660437
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3419309086703270021}
+    m_Modifications:
+    - target: {fileID: 8103289907649549889, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103289907649549889, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103289907649549889, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.4335137
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103289907649549889, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103289907649549889, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103289907649549889, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103289907649549889, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103289907649549889, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103289907649549889, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103289907649549889, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133820424175641304, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+      propertyPath: m_Name
+      value: Knife
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+--- !u!4 &9042721332728617300 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8103289907649549889, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+  m_PrefabInstance: {fileID: 939730703813660437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9066231549388754534 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8132130486879699315, guid: 187a2169d2f96f94faa0ea942de4dba1, type: 3}
+  m_PrefabInstance: {fileID: 939730703813660437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1330a223c5ea8f44ab17105e6a4a1132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Knife
 --- !u!1001 &2258284105115254996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -548,6 +623,10 @@ PrefabInstance:
     - target: {fileID: 8059746684074866481, guid: 0b30bfe2ebf9f3b4ab25e74bf66347bb, type: 3}
       propertyPath: m_Name
       value: RPJ
+      objectReference: {fileID: 0}
+    - target: {fileID: 8059746684074866481, guid: 0b30bfe2ebf9f3b4ab25e74bf66347bb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

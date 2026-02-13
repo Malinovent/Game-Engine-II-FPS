@@ -22,6 +22,8 @@ public class Sniper : WeaponBase, IReloadable
 
         rateOfFire.FireShot();
         weaponAmmo.FireShot();
+
+        UpdateWeaponData();
     }
 
     public override void FirePressed()
@@ -35,5 +37,10 @@ public class Sniper : WeaponBase, IReloadable
     public void Reload()
     {
         weaponAmmo.StartReload();
+    }
+
+    protected override void UpdateWeaponData()
+    {
+        WeaponDataPublisher.PublishData(weaponAmmo, weaponName);
     }
 }

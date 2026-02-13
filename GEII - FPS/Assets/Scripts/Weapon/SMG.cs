@@ -46,5 +46,8 @@ public class SMG : WeaponBase, IFireReleased, IReloadable
         isFiring = false;
     }
 
-    
+    protected override void UpdateWeaponData()
+    {
+        WeaponDataPublisher.PublishData(ammo, weaponName);
+    }
 }
