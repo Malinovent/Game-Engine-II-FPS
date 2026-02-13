@@ -19,6 +19,10 @@ public class WeaponAmmo : MonoBehaviour
     private int remainingAmmo = 10;
     private int remainingMagazines = 3;
 
+    public int MaxAmmo => maxAmmo;
+    public int RemainingAmmo => remainingAmmo;
+    public int RemainingMagazines => remainingMagazines;
+
 
     private void Awake()
     {
