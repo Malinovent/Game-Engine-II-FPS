@@ -309,6 +309,8 @@ GameObject:
   - component: {fileID: 4009340816872579672}
   - component: {fileID: 6098149118994646832}
   - component: {fileID: 7956646649487911055}
+  - component: {fileID: 3841723977884388058}
+  - component: {fileID: 7711886770456773114}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -373,6 +375,7 @@ MonoBehaviour:
   playerMotor: {fileID: 4009340816872579672}
   playerCamera: {fileID: 6098149118994646832}
   playerGunManager: {fileID: 7956646649487911055}
+  playerInteractor: {fileID: 3841723977884388058}
 --- !u!114 &4009340816872579672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +425,35 @@ MonoBehaviour:
   - {fileID: 8133950766598420681}
   - {fileID: 3472585236286864860}
   - {fileID: 9066231549388754534}
+--- !u!114 &3841723977884388058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642405132945335016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b99b3e617435104897f6483029c14a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
+  raycaster: {fileID: 7711886770456773114}
+--- !u!114 &7711886770456773114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642405132945335016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10cb0c36286e1894cb1e4ffeb6dabcd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponRaycaster
+  validLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  maxDistance: 5
 --- !u!1001 &305968474579766134
 PrefabInstance:
   m_ObjectHideFlags: 0

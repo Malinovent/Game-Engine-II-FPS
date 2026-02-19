@@ -7,6 +7,7 @@ public class PlayerBrain : MonoBehaviour
     [SerializeField] private PlayerMotor playerMotor;
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private PlayerGunManager playerGunManager;
+    [SerializeField] private PlayerInteractor playerInteractor;
 
     private Input_PlayerControls input;
     private Vector2 moveInput;
@@ -42,6 +43,7 @@ public class PlayerBrain : MonoBehaviour
         playerMotor.UpdateMotor();
 
         playerGunManager.UpdateWeapon();
+        playerInteractor.UpdateInteractor();
     }
 
     private void SubscribeToEvents()
@@ -60,16 +62,9 @@ public class PlayerBrain : MonoBehaviour
         input.Player.Fire.canceled += OnFireReleased;
 
         input.Player.SwitchWeapon.performed += OnSwitchWeapon;
+        input.Player.Interact.performed += OnInteract;
     }
 
-    private void OnSwitchWeapon(InputAction.CallbackContext ctx)
-    {
-        float value = ctx.ReadValue<float>();
-
-        playerGunManager.SwitchWeapon(value > 0);
-
-        Debug.Log($"Scroll wheel: {value}");
-    }
 
     private void UnsubscribeFromEvents()
     {
@@ -85,6 +80,20 @@ public class PlayerBrain : MonoBehaviour
 
         input.Player.Fire.performed -= OnFirePressed;
         input.Player.Fire.canceled -= OnFireReleased;
+    }
+
+    private void OnInteract(InputAction.CallbackContext ctx)
+    {
+        playerInteractor.Interact();
+    }
+
+    private void OnSwitchWeapon(InputAction.CallbackContext ctx)
+    {
+        float value = ctx.ReadValue<float>();
+
+        playerGunManager.SwitchWeapon(value > 0);
+
+        Debug.Log($"Scroll wheel: {value}");
     }
 
     private void OnJump(InputAction.CallbackContext context)

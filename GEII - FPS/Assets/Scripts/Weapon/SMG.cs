@@ -5,8 +5,10 @@ public class SMG : WeaponBase, IFireReleased, IReloadable
     [SerializeField] private WeaponRaycaster raycaster;
     [SerializeField] private WeaponRateOfFire RoF;
     [SerializeField] private WeaponAmmo ammo;
+    [SerializeField] private Damager damager;
 
     private bool isFiring = false;
+    private IDamageable currentTarget;
 
     void Start()
     {
@@ -15,10 +17,7 @@ public class SMG : WeaponBase, IFireReleased, IReloadable
 
     private void FireWeapon()
     {
-        if(raycaster.TryGetTarget(out RaycastHit hit))
-        {
-            //Do damage
-        }
+        damager.Damage(currentTarget);
 
         RoF.FireShot();
         ammo.FireShot();
@@ -30,7 +29,26 @@ public class SMG : WeaponBase, IFireReleased, IReloadable
         ammo.UpdateReload(Time.deltaTime);
         RoF.UpdateFire(Time.deltaTime);
 
-        if(RoF.CanFire && ammo.HasAmmo() && isFiring && !ammo.IsReloading)
+        if (raycaster.TryGetTarget(out RaycastHit hit))
+        {
+            bool hasTargetAlready = currentTarget != null;
+            currentTarget = hit.collider.GetComponent<IDamageable>();
+
+            if(currentTarget == null && hasTargetAlready)
+            {
+                UIEvents.OnCrosshairUpdated?.Invoke(Color.black);
+            }
+            else if(currentTarget != null)
+            {
+                UIEvents.OnCrosshairUpdated?.Invoke(Color.red);
+            }
+        } else if (currentTarget != null)
+        {
+            currentTarget = null;
+            UIEvents.OnCrosshairUpdated?.Invoke(Color.black);
+        }
+
+        if (RoF.CanFire && ammo.HasAmmo() && isFiring && !ammo.IsReloading)
         {
             FireWeapon();
         }

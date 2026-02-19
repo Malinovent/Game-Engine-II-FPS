@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 538420643229257528}
   - component: {fileID: 5681521496734837481}
   - component: {fileID: 5066769918369242248}
+  - component: {fileID: 9207388380230508015}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -52,6 +53,7 @@ MonoBehaviour:
   raycaster: {fileID: 5066769918369242248}
   RoF: {fileID: 538420643229257528}
   ammo: {fileID: 5681521496734837481}
+  damager: {fileID: 0}
 --- !u!114 &538420643229257528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,7 +97,23 @@ MonoBehaviour:
   validLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  mainCamera: {fileID: 0}
+  maxDistance: 200
+--- !u!114 &9207388380230508015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6117543109946926448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241dc72c13331a14f819e911dcfc6944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damager
+  damageInfo:
+    source: SMG
+    damageType: Ballistic
+    amount: 1
 --- !u!1001 &8695631159742957393
 PrefabInstance:
   m_ObjectHideFlags: 0
