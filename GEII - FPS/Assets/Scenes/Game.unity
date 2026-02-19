@@ -631,6 +631,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   startingHealth: 10
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1234516846}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &401503978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -972,6 +987,17 @@ MonoBehaviour:
   ammoText2: {fileID: 1869648493}
   magazineText: {fileID: 310154712}
   weaponName: {fileID: 135522864}
+--- !u!114 &1152772098 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8932945137914959513, guid: 2e47282af90538a4ea26aae3411d2927, type: 3}
+  m_PrefabInstance: {fileID: 4179049458305513758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241dc72c13331a14f819e911dcfc6944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damager
 --- !u!1 &1234516843
 GameObject:
   m_ObjectHideFlags: 0
@@ -6641,6 +6667,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8133950766598420681, guid: 2e47282af90538a4ea26aae3411d2927, type: 3}
+      propertyPath: damager
+      value: 
+      objectReference: {fileID: 1152772098}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
