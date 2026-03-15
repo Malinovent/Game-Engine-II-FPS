@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5082112658559771693}
   - component: {fileID: 7870517459601106134}
   - component: {fileID: 9090363137371307833}
+  - component: {fileID: 1372403916434868715}
   m_Layer: 0
   m_Name: Enemy Vanguard
   m_TagString: Untagged
@@ -50,10 +51,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 2
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 90
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -75,6 +76,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AIVanguard
   behaviourNavMeshAgent: {fileID: 5109427929564880457}
   behaviourHearing: {fileID: 5082112658559771693}
+  patrolBehaviour: {fileID: 1372403916434868715}
+  animator: {fileID: 2959108386655102994}
   projectileAttack: {fileID: 7870517459601106134}
   attackEnterRange: 5
   attackExitRange: 7
@@ -91,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AIBehaviourNavMeshAgent
   navMeshAgent: {fileID: 7179840331055768175}
+  rotationSpeed: 5
 --- !u!114 &5082112658559771693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +137,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponRateOfFire
   roundsPerSecond: 0.5
+--- !u!114 &1372403916434868715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715482174159004324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91c71d641b14044dbde072fce49101b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AIPatrolBehaviour
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  patrolSpeed: 3
+  navMeshAgent: {fileID: 7179840331055768175}
+  distanceThreshold: 1
+  waitTimeAtWaypoint: 2
 --- !u!1 &6519013937811132866
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.93358046
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
       propertyPath: m_LocalRotation.x
@@ -194,7 +220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.35836798
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
       propertyPath: m_LocalRotation.z
@@ -206,7 +232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -218,17 +244,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 77b994ba9e54c5f4894e45e049ea57f2, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
+--- !u!95 &2959108386655102994 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
+  m_PrefabInstance: {fileID: 8681331288653976963}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9219134187440255592 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 005a746c3818a6e46a51c9944d8d6183, type: 3}
